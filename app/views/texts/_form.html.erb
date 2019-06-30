@@ -1,0 +1,38 @@
+<%= form_for(@text) do |f| %>
+  <% if @text.errors.any? %>
+      <% @text.errors.each do |attr, msg| %>
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <p><%= msg.try(:html_safe) %></p>
+          </div>
+      <% end %>
+  <% end %>
+
+  <% if notice || alert %>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <p><%= notice.try(:html_safe) %><%= alert.message.try(:html_safe) %></p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <!--[if lt IE 9]>
+      <label>Phone Number (US only)</label>
+    <![endif]-->
+    <%= f.text_field :num, class: 'form-control', placeholder: 'Phone Number (US only)' %>
+  </div>
+  <div class="form-group">
+    <!--[if lt IE 9]>
+      <label>Messag for Kelly (optional)</label>
+    <![endif]-->
+    <%= f.text_area :msg, class: 'form-control', placeholder: 'Message for Kelly (optional)' %>
+  </div>
+  <div class="submit">
+    <%= f.submit "Send Text Message", class:"btn btn-primary btn-md", type: "submit" %>
+  </div>
+
+<% end %>

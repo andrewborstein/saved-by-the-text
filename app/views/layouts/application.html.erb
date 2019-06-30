@@ -4,12 +4,37 @@
     <title>SavedByTheTextNew</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="<%= body_classes(yield :body_classes) %>">
+
+    <div class="container-fluid">
+      <div class="content col-xs-12 col-sm-6 col-md-4">
+        <%= yield %>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var numInput = document.getElementById("text_num")
+      if (numInput) {
+        VMasker(numInput).maskPattern('(999) 999-9999');
+      }
+
+
+      dismissButton = document.querySelector('[data-dismiss="alert"]')
+      if (dismissButton) {
+        dismissButton.addEventListener('click', function(event) {
+          container = event.target.closest('.alert')
+          container.remove()
+        })
+      }
+
+    </script>
   </body>
 </html>
